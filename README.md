@@ -84,6 +84,7 @@ Data Stucture┤
              └Graph─DAG
 ```
 If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
+
 Now let's move on to some more complex examples. In the `example` directory I have defined a primitive search tree with custom numbers of branch. For brevity only the `__init__` function of the `Node` is shown here. If `branch == 2` then it's a binary search tree.
 ```
 class Node(object):
@@ -93,7 +94,7 @@ class Node(object):
         self.branch = branch
         self.children = [None] * branch
 ```
-If we wish to emphasize on the `binary` structure, we can override `get_children` and `get_node_str` as follows:
+If we wish to emphasize on the *binary* structure, we can override `get_children` and `get_node_str` as follows:
 ```
 class print_binary(print_tree):
     def get_children(self, node):
@@ -106,7 +107,7 @@ class print_binary(print_tree):
     def get_node_str(self, node):
         return str(node.values[0])
 ```
-In this case it is possible that the return list of `get_children` contains `None`. If `None` is in the return list, `print_tree` will take it as a placeholder: Nothing will be shown, but it takes blank space:
+In this case it is possible that the return list of `get_children` contains `None`. If `None` is in the return list, `print_tree` will take it as a placeholder: nothing will be shown, but it takes blank space:
 ```
 # Tree (bst) already initialized
 >>> print_binary(bst.root)
@@ -154,6 +155,8 @@ class print_binary_without_placeholder(print_tree):
         return str(node.values[0])
 
 # initialize the tree(bst)
+...
+
 print_binary_without_placeholder(bst.root)
 
               ┌18
