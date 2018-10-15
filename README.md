@@ -139,7 +139,7 @@ In this case it is possible that the return list of `get_children` contains `Non
   └0┘
 ```
 Because the tree is randomly generated, the result is probably different from what you saw when you test your installation. However, in both cases, you can read the inorder transverse of the tree from bottom to top as `list(range(20))` (0 to 19).
-The effect of `None` becomes prominent when we delete them:
+The effect of `None` becomes prominent after we delete them:
 ```
 class print_binary_without_placeholder(print_tree):
     def get_children(self, node):
