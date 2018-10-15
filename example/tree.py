@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# liwt31@163.com
+
 
 class Node(object):
 
@@ -49,5 +51,3 @@ class SearchTree(object):
                 return self.insert(value, child)
         else:
             return node.add_child(value)
-
-

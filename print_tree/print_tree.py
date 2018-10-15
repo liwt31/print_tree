@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# liwt31@163.com
+
 
 def split_children(children_list):
     up_list = []
@@ -21,6 +23,9 @@ def check_all_none_child(children_list):
             return False
     return True
 
+# Box drawing characters: https://en.wikipedia.org/wiki/Box-drawing_character
+# Unicode spaces: http://jkorpela.fi/chars/spaces.html
+SPACE = ' '
 
 class PrintTree(object):
 
@@ -66,7 +71,7 @@ class PrintTree(object):
         valid_down = not check_all_none_child(down_list)
         for idx, child in enumerate(up_list):
             if idx == 0:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, '  ', '┌', '│')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, SPACE, '┌', '│')
             else:
                 new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│')
             print_rows.extend(new_child_print_rows)
@@ -75,12 +80,12 @@ class PrintTree(object):
                 if valid_down:
                     new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┼', '│')
                 else:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┴', '  ')
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┴', SPACE)
             else:
                 if valid_down:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '  ', '┬', '│')
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '┬', '│')
                 else:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '  ', '─', '  ')
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '─', SPACE)
             center_row_tail = new_child_print_rows[center_row_idx][len(child_space):]
             new_center_row = '{}{}'.format(node_str, center_row_tail)
             new_child_print_rows[center_row_idx] = new_center_row
@@ -97,8 +102,7 @@ class PrintTree(object):
             if idx != len(down_list) - 1:
                 new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│')
             else:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '└', '  ')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '└', ' ')
             print_rows.extend(new_child_print_rows)
         new_center_idx = print_rows.index(new_center_row)
         return print_rows, new_center_idx
-

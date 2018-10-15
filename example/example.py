@@ -1,9 +1,28 @@
 # -*- coding: utf-8 -*-
+# liwt31@163.com
 
 import random
 
 from tree import SearchTree
 from print_tree import print_tree
+
+
+class Node(object):
+
+    def __init__(self, value, parent):
+        self.value = value
+        self.children = []
+        if parent is not None:
+            parent.children.append(self)
+
+
+class print_custom_tree(print_tree):
+
+    def get_children(self, node):
+        return node.children
+
+    def get_node_str(self, node):
+        return str(node.value)
 
 
 class print_binary(print_tree):
@@ -16,6 +35,7 @@ class print_binary(print_tree):
 
     def get_node_str(self, node):
         return str(node.values[0])
+
 
 class print_binary_without_placeholder(print_tree):
     def get_children(self, node):
@@ -45,32 +65,8 @@ class print_tertiary(print_tree):
         else:
             return '{}'.format(node.values[0])
 
-class Node(object):
-
-    def __init__(self, value, parent):
-        self.value = value
-        self.children = []
-        if parent is not None:
-            parent.children.append(self)
-
-class print_custom_tree(print_tree):
-
-    def get_children(self, node):
-        return node.children
-
-    def get_node_str(self, node):
-        return str(node.value)
 
 if __name__ == '__main__':
-    elem_list = list(range(20))
-    random.shuffle(elem_list)
-    print(elem_list)
-    bst = SearchTree(elem_list)
-    print_binary(bst.root)
-    print_binary_without_placeholder(bst.root)
-    tst = SearchTree(elem_list, 3)
-    print_tertiary(tst.root)
-
     data_structure = Node('Data Stucture', None)
 
     vector = Node('Vector', data_structure)
@@ -87,4 +83,11 @@ if __name__ == '__main__':
 
     print_custom_tree(data_structure)
 
-
+    elem_list = list(range(20))
+    random.shuffle(elem_list)
+    print(elem_list)
+    bst = SearchTree(elem_list)
+    print_binary(bst.root)
+    print_binary_without_placeholder(bst.root)
+    tst = SearchTree(elem_list, 3)
+    print_tertiary(tst.root)
