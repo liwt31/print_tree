@@ -94,8 +94,7 @@ class PrintTree(object):
             if valid_up:
                 shape = '┤' if valid_down else '┘'
             else:
-                # valid_down must be True
-                shape = '┐'
+                shape = '┐' if valid_down else ''
             new_center_row = '{}{}'.format(node_str, shape)
             print_rows.append(new_center_row)
         for idx, child in enumerate(down_list):
