@@ -5,7 +5,7 @@ with open('README.md', 'rb') as fin:
 
 setuptools.setup(
     name='print_tree2',
-    version='0.9.4',
+    version='0.9.5',
     packages=setuptools.find_packages(),
     long_description=long_description,
     long_description_content_type='text/markdown',
