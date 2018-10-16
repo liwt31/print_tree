@@ -42,7 +42,7 @@ class PrintTree(object):
 
     def add_prefix(self, child, child_space, c1, c2, c3):
         if child is None:
-            return ['{}'.format(child_space), 0]
+            return ['{}'.format(child_space)], 0
         child_print_rows, center_row_idx = self.get_print_rows(child)
         new_child_print_rows = []
         for row_idx, row in enumerate(child_print_rows):

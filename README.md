@@ -5,7 +5,7 @@ This package helps you to print your tree structure in a pretty format.
 ```
 pip install print_tree2
 ```
-I wish to use `print_tree` as the name but the package already on pypi though it's not working.
+I wish to use `print_tree` as the name but the package is already on pypi though it's not working.
 To verify your installation, try:
 ```
 git clone https://github.com/liwt31/print_tree.git
