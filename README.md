@@ -3,7 +3,7 @@ This package helps you to print your tree structure in a pretty format.
 
 ### Install
 ```
-pip install print_tree2
+pip install print-tree2
 ```
 I wish to use `print_tree` as the name but the package is already on pypi though it's not working.
 To verify your installation, try:
