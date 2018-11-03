@@ -4,7 +4,7 @@
 import random
 
 from tree import SearchTree
-from print_tree import print_tree
+from print_tree import print_tree, PlaceHolder
 
 
 class Node(object):
@@ -31,6 +31,8 @@ class print_binary(print_tree):
         if r_child is None and l_child is None:
             return []
         else:
+            r_child = r_child or PlaceHolder
+            l_child = l_child or PlaceHolder
             return [r_child, l_child]
 
     def get_node_str(self, node):
@@ -57,6 +59,9 @@ class print_tertiary(print_tree):
         if r_child is None and m_child is None and l_child is None:
             return []
         else:
+            r_child = r_child or PlaceHolder
+            m_child = m_child or PlaceHolder
+            l_child = l_child or PlaceHolder
             return [r_child, m_child, l_child]
 
     def get_node_str(self, node):

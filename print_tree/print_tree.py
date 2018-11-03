@@ -2,9 +2,13 @@
 # liwt31@163.com
 
 
+class PlaceHolder(object):
+    pass
+
+
 def split_children(children_list):
     up_list = []
-    mid_child = None
+    mid_child = PlaceHolder
     down_list = []
     mid_idx = len(children_list) // 2
     for idx, child in enumerate(children_list):
@@ -19,31 +23,35 @@ def split_children(children_list):
 
 def check_all_none_child(children_list):
     for child in children_list:
-        if child is not None:
+        if child is not PlaceHolder:
             return False
     return True
 
 # Box drawing characters: https://en.wikipedia.org/wiki/Box-drawing_character
 # Unicode spaces: http://jkorpela.fi/chars/spaces.html
-SPACE = ' '
+SPACE = '\u2001' # a corss-platform wide space
 
 class PrintTree(object):
 
-    def __init__(self, node):
-        rows, idx = self.get_print_rows(node)
-        for row in rows:
-            print(row)
+    def __init__(self, node, max_depth=50):
+        try:
+            rows, idx = self.get_print_rows(node, max_depth)
+        except RecursionError:
+            raise ValueError("Maximum recursion depth met. Is there a loop in your tree?")
+        else:
+            for row in rows:
+                print(row)
 
     def get_children(self, node):
         raise NotImplementedError
 
     def get_node_str(self, node):
-        raise NotImplementedError
+        return str(node)
 
-    def add_prefix(self, child, child_space, c1, c2, c3):
-        if child is None:
+    def add_prefix(self, child, child_space, c1, c2, c3, max_depth):
+        if child is PlaceHolder:
             return ['{}'.format(child_space)], 0
-        child_print_rows, center_row_idx = self.get_print_rows(child)
+        child_print_rows, center_row_idx = self.get_print_rows(child, max_depth-1)
         new_child_print_rows = []
         for row_idx, row in enumerate(child_print_rows):
             if row_idx < center_row_idx:
@@ -55,10 +63,13 @@ class PrintTree(object):
             new_child_print_rows.append('{}{}{}'.format(child_space, shape, row))
         return new_child_print_rows, center_row_idx
 
-    def get_print_rows(self, node):
-        if node is None:
+    def get_print_rows(self, node, max_depth):
+        if node is PlaceHolder:
             return [''], 0
-        children_list = self.get_children(node)
+        if max_depth == 0:
+            children_list = []
+        else:
+            children_list = self.get_children(node)
         node_str = self.get_node_str(node)
         new_center_row = 0
         if len(children_list) == 0:
@@ -67,25 +78,25 @@ class PrintTree(object):
         child_space = ' ' * len(node_str)
         up_list, mid_child, down_list = split_children(children_list)
         valid_up = not check_all_none_child(up_list)
-        valid_mid = mid_child is not None
+        valid_mid = mid_child is not PlaceHolder
         valid_down = not check_all_none_child(down_list)
         for idx, child in enumerate(up_list):
             if idx == 0:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, SPACE, '┌', '│')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, SPACE, '┌', '│', max_depth)
             else:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│', max_depth)
             print_rows.extend(new_child_print_rows)
         if valid_mid:
             if valid_up:
                 if valid_down:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┼', '│')
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┼', '│', max_depth)
                 else:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┴', SPACE)
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, '│', '┴', SPACE, max_depth)
             else:
                 if valid_down:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '┬', '│')
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '┬', '│', max_depth)
                 else:
-                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '─', SPACE)
+                    new_child_print_rows, center_row_idx = self.add_prefix(mid_child, child_space, SPACE, '─', SPACE, max_depth)
             center_row_tail = new_child_print_rows[center_row_idx][len(child_space):]
             new_center_row = '{}{}'.format(node_str, center_row_tail)
             new_child_print_rows[center_row_idx] = new_center_row
@@ -99,9 +110,9 @@ class PrintTree(object):
             print_rows.append(new_center_row)
         for idx, child in enumerate(down_list):
             if idx != len(down_list) - 1:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '├', '│', max_depth)
             else:
-                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '└', ' ')
+                new_child_print_rows, _ = self.add_prefix(child, child_space, '│', '└', ' ', max_depth)
             print_rows.extend(new_child_print_rows)
         new_center_idx = print_rows.index(new_center_row)
         return print_rows, new_center_idx
