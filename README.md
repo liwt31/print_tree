@@ -1,5 +1,7 @@
 # print_tree
+[![Build Status](https://travis-ci.org/liwt31/print_tree.svg?branch=master)](https://travis-ci.org/liwt31/print_tree)
 This package helps you to print your tree structure in a pretty format.
+
 
 ### Install
 ```
@@ -21,7 +23,8 @@ The most important reason is:
 
 Besides, this package:
 * Does not change the order of your children ([pptree](https://github.com/clemtoy/pptree) does).
-* Use Unicode to achieve cross-platform -- [pptree](https://github.com/clemtoy/pptree) fails on Windows because of wider space on terminals.
+* Uses Unicode to achieve cross-platform -- [pptree](https://github.com/clemtoy/pptree) fails on Windows because of wider space on terminals.
+* Supports colored terminal strings (Only for Linux currently) and full-width characters.
 
 Still, **[pptree](https://github.com/clemtoy/pptree) is a wonderful package**. The implementation is really beautiful and I borrowed some ideas from the author.
 
