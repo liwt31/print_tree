@@ -3,7 +3,6 @@
 
 
 class Node(object):
-
     def __init__(self, value, branch):
         self.values = [value]
         self.branch = branch
@@ -28,7 +27,6 @@ class Node(object):
 
 
 class SearchTree(object):
-
     def __init__(self, sequence, branch=2):
         if len(sequence) == 0:
             return

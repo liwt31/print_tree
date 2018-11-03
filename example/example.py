@@ -8,7 +8,6 @@ from print_tree import print_tree, PlaceHolder
 
 
 class Node(object):
-
     def __init__(self, value, parent):
         self.value = value
         self.children = []
@@ -17,7 +16,6 @@ class Node(object):
 
 
 class print_custom_tree(print_tree):
-
     def get_children(self, node):
         return node.children
 
@@ -66,25 +64,25 @@ class print_tertiary(print_tree):
 
     def get_node_str(self, node):
         if node.full:
-            return '{}, {}'.format(*node.values)
+            return "{}, {}".format(*node.values)
         else:
-            return '{}'.format(node.values[0])
+            return "{}".format(node.values[0])
 
 
-if __name__ == '__main__':
-    data_structure = Node('Data Stucture', None)
+if __name__ == "__main__":
+    data_structure = Node("Data Stucture", None)
 
-    vector = Node('Vector', data_structure)
-    list_ = Node('List', data_structure)
-    tree = Node('Tree', data_structure)
-    graph = Node('Graph', data_structure)
+    vector = Node("Vector", data_structure)
+    list_ = Node("List", data_structure)
+    tree = Node("Tree", data_structure)
+    graph = Node("Graph", data_structure)
 
-    dag = Node('DAG', graph)
-    avl = Node('AVL', tree)
-    splay = Node('Splay', tree)
-    b = Node('B', tree)
-    quad = Node('Quand', tree)
-    kd = Node('kd', tree)
+    dag = Node("DAG", graph)
+    avl = Node("AVL", tree)
+    splay = Node("Splay", tree)
+    b = Node("B", tree)
+    quad = Node("Quand", tree)
+    kd = Node("kd", tree)
 
     print_custom_tree(data_structure)
 
