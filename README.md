@@ -89,8 +89,9 @@ Data Stucture┤
 ```
 And a colored version if you run the file in the `example` directory:
 
-If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
 ![](https://user-images.githubusercontent.com/22628546/47987611-eb6d2c80-e11a-11e8-96bd-35b2370a8c5d.gif)
+
+If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
 Now let's move on to some more complex examples. In the `example` directory I have defined a primitive search tree with custom numbers of branch. For brevity only the `__init__` function of the `Node` is shown here. If `branch == 2` then it's a binary search tree.
 ```python
 class Node(object):
