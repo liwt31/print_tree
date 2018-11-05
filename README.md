@@ -30,9 +30,9 @@ Besides, this package:
 Still, **[pptree](https://github.com/clemtoy/pptree) is a wonderful package**. The implementation is really beautiful and I borrowed some ideas from the author.
 
 ### Documentation
-The `print*.py` files in the `example` directory provides several examples on how to use the package. And below can be regard as an explanation of these files. The files in `example` directory enabled coloring to demonstrate the ability of this package to print tree with colors. Because the effect can not be seen in this MD file, corresponding codes are ommited.
+The `print*.py` files in the `example` directory provides several examples on how to use the package. And below can be regard as an explanation of these files. The files in `example` directory enables coloring to demonstrate the ability of this package to print tree with colors. Because the effect can not be seen in this md file, corresponding codes are ommited.
 Suppose we have the `Node` class:
-```
+```python
 class Node(object):
 
     def __init__(self, value, parent):
@@ -87,11 +87,12 @@ Data Stucture┤
              │    └kd
              └Graph─DAG
 ```
-And a colored version if you run the file in the `example` directory:
+Below is a colored version if you run the file in the `example` directory:
 
 ![](https://user-images.githubusercontent.com/22628546/47987611-eb6d2c80-e11a-11e8-96bd-35b2370a8c5d.gif)
 
 If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
+
 Now let's move on to some more complex examples. In the `example` directory I have defined a primitive search tree with custom numbers of branch. For brevity only the `__init__` function of the `Node` is shown here. If `branch == 2` then it's a binary search tree.
 ```python
 class Node(object):
@@ -148,6 +149,7 @@ In this case it is possible that the return list of `get_children` contains `Pla
   └0┘
 ```
 Because the tree is randomly generated, the result is probably different from what you saw when you test your installation. However, in both cases, you can read the inorder transverse of the tree from bottom to top as `list(range(20))` (0 to 19).
+
 The effect of `PlaceHolder` becomes prominent after we delete them (also note on the benefit of inheritance):
 ```python
 class print_binary_without_placeholder(print_binary):
