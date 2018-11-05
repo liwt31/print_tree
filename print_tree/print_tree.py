@@ -6,6 +6,8 @@ import warnings
 import unicodedata
 import re
 
+import IPython
+
 from .compat import CompatRecursionError
 
 
@@ -65,20 +67,22 @@ SPACE = "\u2001"  # a corss-platform wide space
 
 
 class PrintTree(object):
-    def __init__(self, node, max_depth=50):
+    def __init__(self, node, max_depth=50, paging=False):
         recursion_error_flag = False
         try:
             self.rows, self.idx = self.get_print_rows(node, max_depth)
         except CompatRecursionError:
             recursion_error_flag = True  # a little trick to hide LONG traceback
-        else:
-            print()  # a blank line
-            for row in self.rows:
-                print(row)
         if recursion_error_flag:
             raise ValueError(
                 "Maximum recursion depth met. Is there a loop in your tree?"
             )
+        if paging:
+            IPython.core.page.page('\n'.join(self.rows))
+        else:
+            print()  # a blank line
+            for row in self.rows:
+                print(row)
 
     def get_children(self, node):
         raise NotImplementedError
