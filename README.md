@@ -42,7 +42,7 @@ class Node(object):
             parent.children.append(self)
 ```
 As an example, let's construct a tree as follows:
-```
+```python
 data_structure = Node('Data Stucture', None)
 
 vector = Node('Vector', data_structure)
@@ -62,7 +62,7 @@ To print the tree, we have to tell `print_tree` two things:
 2. how to interpret every node as a string. 
 
 To achieve these goals, we inherent `print_tree` from the package then override `get_children` and `get_node_str`:
-```
+```python
 from print_tree import print_tree
 
 class print_custom_tree(print_tree):
@@ -87,10 +87,12 @@ Data Stucture┤
              │    └kd
              └Graph─DAG
 ```
-If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
+And a colored version if you run the file in the `example` directory:
 
+If you feel uncomfortable about the naming of the class, you can import `PrintTree` then use `PrintTree` instead. 
+![](https://user-images.githubusercontent.com/22628546/47987611-eb6d2c80-e11a-11e8-96bd-35b2370a8c5d.gif)
 Now let's move on to some more complex examples. In the `example` directory I have defined a primitive search tree with custom numbers of branch. For brevity only the `__init__` function of the `Node` is shown here. If `branch == 2` then it's a binary search tree.
-```
+```python
 class Node(object):
 
     def __init__(self, value, branch):
@@ -99,7 +101,7 @@ class Node(object):
         self.children = [None] * branch
 ```
 If we wish to emphasize on the *binary* structure, we can override `get_children` and `get_node_str` as follows:
-```
+```python
 class print_binary(print_tree):
     def get_children(self, node):
         l_child, r_child = node.children
@@ -146,7 +148,7 @@ In this case it is possible that the return list of `get_children` contains `Pla
 ```
 Because the tree is randomly generated, the result is probably different from what you saw when you test your installation. However, in both cases, you can read the inorder transverse of the tree from bottom to top as `list(range(20))` (0 to 19).
 The effect of `PlaceHolder` becomes prominent after we delete them (also note on the benefit of inheritance):
-```
+```python
 class print_binary_without_placeholder(print_binary):
     def get_children(self, node):
         l_child, r_child = node.children
